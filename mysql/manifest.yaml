@@ -25,26 +25,26 @@ spec:
       tier: db
   serviceName: "nginx"
   replicas: 3 # by default is 1
-  template:
-    metadata:
-      labels:
-        component: mysql
-        project: expense
-        tier: db
-    spec:
-      containers:
-      - name: mysql
-        image: joindevops/mysql:v1.0
-        ports:
-        - containerPort: 80
-          name: web
-        volumeMounts:
+   template:
+     metadata:
+       labels:
+         component: mysql
+         project: expense
+         tier: db
+      spec:
+        containers:
         - name: mysql
-          mountPath: /var/lib/mysql
-   volumes:
-  - name: mysql
-    persistentVolumeClaim:
-      claimName: mysql
+          image: joindevops/mysql:v1.0
+          ports:
+          - containerPort: 80
+            name: web
+          volumeMounts:
+          - name: mysql
+            mountPath: /var/lib/mysql
+        volumes:
+        - name: mysql
+          persistentVolumeClaim:
+            claimName: mysql
 
 ---
 apiVersion: v1
